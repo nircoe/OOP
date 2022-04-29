@@ -22,6 +22,17 @@ public class CasaDeBurritoImpl implements CasaDeBurrito
         this.rates = new HashMap<Integer, Integer>();
     }
 
+    public CasaDeBurritoImpl(CasaDeBurrito other)
+    {
+        this.id = other.getId();
+        this.name = other.getName();
+        this.dist = other.distance();
+        this.menu = new HashSet<String>(((CasaDeBurritoImpl) other).menu);
+        this.rate_cnt = other.numberOfRates();
+        this.rate_sum = ((CasaDeBurritoImpl) other).rate_sum;
+        this.rates = new HashMap<Integer, Integer>(((CasaDeBurritoImpl) other).rates);
+    }
+
     @Override
     public int getId()
     {

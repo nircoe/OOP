@@ -17,6 +17,13 @@ public class ProfesorImpl implements Profesor
         this.favorites = new HashSet<CasaDeBurrito>();
     }
 
+    public ProfesorImpl(Profesor other) {
+        this.id = other.getId();
+        this.name = ((ProfesorImpl) other).name;
+        this.friends = other.getFriends();
+        this.favorites = new HashSet<CasaDeBurrito>(other.favorites());
+    }
+
     @Override
     public int getId() {
         return id;

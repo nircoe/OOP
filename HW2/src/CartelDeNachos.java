@@ -1,5 +1,7 @@
 import java.util.Collection;
 import OOP.Provided.Profesor.*;
+import OOP.Provided.CasaDeBurrito;
+import OOP.Provided.Profesor;
 import OOP.Provided.CasaDeBurrito.*;
 
 import java.util.List;
