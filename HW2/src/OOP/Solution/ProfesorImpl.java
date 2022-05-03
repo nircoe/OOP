@@ -1,8 +1,13 @@
-package OOP.Provided;
+package OOP.Solution;
+
+
+import OOP.Provided.CasaDeBurrito;
+import OOP.Provided.Profesor;
+
 import java.util.*;
 import java.util.function.Predicate;
 
-public class ProfesorImpl implements Profesor 
+public class ProfesorImpl implements Profesor
 {
     private int id;
     private String name;
@@ -106,19 +111,21 @@ public class ProfesorImpl implements Profesor
     @Override
     public String toString() 
     {
-        String str = "Profesor: " + this.name;
-        str += "\nId: " + this.id;
+        String str = "Profesor: " + this.name + ".";
+        str += "\nId: " + this.id + ".";
         str += "\nFavorites: ";
-        CasaDeBurrito[] favorites = (CasaDeBurrito[]) this.favorites.toArray();
+        Object[] favorites = this.favorites.toArray();
         Arrays.sort(favorites);
         for (int i = 0; i < favorites.length; i++)
         {
-            str += favorites[i].getName();
+            str += ((CasaDeBurrito) favorites[i]).getName();
             if(i < favorites.length - 1)
                 str += ", ";
             else
                 str += ".";
         }
+        if (favorites.length == 0)
+            str += ".";
         return str;
     }
 
@@ -133,6 +140,14 @@ public class ProfesorImpl implements Profesor
             return 0;
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (!(obj instanceof Profesor)) return false;
+
+        return ((Profesor) obj).getId() == this.id;
+    }
 
     @Override
     public Collection<CasaDeBurrito> filterAndSortFavorites(Comparator<CasaDeBurrito> comp,

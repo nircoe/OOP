@@ -1,3 +1,5 @@
+package OOP.Provided;
+
 import java.util.Collection;
 import OOP.Provided.Profesor.*;
 import OOP.Provided.CasaDeBurrito;

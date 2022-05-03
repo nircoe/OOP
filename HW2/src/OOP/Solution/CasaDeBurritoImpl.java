@@ -1,4 +1,7 @@
-package OOP.Provided;
+package OOP.Solution;
+
+import OOP.Provided.CasaDeBurrito;
+import OOP.Provided.Profesor;
 import java.util.*;
 
 public class CasaDeBurritoImpl implements CasaDeBurrito
@@ -16,7 +19,7 @@ public class CasaDeBurritoImpl implements CasaDeBurrito
         this.id = id;
         this.name = name;
         this.dist = dist;
-        this.menu = menu;
+        this.menu = new HashSet<>(menu);
         this.rate_cnt = 0;
         this.rate_sum = 0;
         this.rates = new HashMap<Integer, Integer>();
@@ -88,27 +91,31 @@ public class CasaDeBurritoImpl implements CasaDeBurrito
     @Override
     public double averageRating()
     {
+        if (rate_cnt == 0) return 0;
+
         return (double) rate_sum / (double) rate_cnt;
     }
     
     @Override
     public String toString()
     {
-        String str = "CasaDeBurrito: " + this.name;
-        str += "\nId: " + this.id;
-        str += "\nDistance: " + this.dist;
-        str += "\nMenu: ";
-        String[] menu = (String[]) this.menu.toArray();
+        StringBuilder str = new StringBuilder("CasaDeBurrito: " + this.name).append(".");
+        str.append("\nId: ").append(this.id).append(".");
+        str.append("\nDistance: ").append(this.dist).append(".");
+        str.append("\nMenu: ");
+        Object[] menu = this.menu.toArray();
         Arrays.sort(menu);
         for (int i = 0; i < menu.length; i++)
         {
-            str += menu[i];
+            str.append(menu[i].toString());
             if(i < menu.length - 1)
-                str += ", ";
+                str.append(", ");
             else
-                str += ".";
+                str.append(".");
         }
-        return str;
+        if (menu.length == 0)
+            str.append(".");
+        return str.toString();
     }
 
     @Override
@@ -120,6 +127,13 @@ public class CasaDeBurritoImpl implements CasaDeBurrito
             return 1;
         else
             return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (!(obj instanceof CasaDeBurrito)) return false;
+        return ((CasaDeBurrito) obj).getId() == this.id;
     }
 
     /*

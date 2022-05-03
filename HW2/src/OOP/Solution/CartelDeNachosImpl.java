@@ -1,10 +1,16 @@
+package OOP.Solution;
+
 import java.util.*;
+
 import OOP.Provided.Profesor;
-import OOP.Provided.ProfesorImpl;
-import OOP.Provided.Profesor.*;
+import OOP.Provided.Profesor.ProfesorAlreadyInSystemException;
+import OOP.Provided.Profesor.ProfesorNotInSystemException;
+import OOP.Provided.Profesor.SameProfesorException;
+import OOP.Provided.Profesor.ConnectionAlreadyExistsException;
 import OOP.Provided.CasaDeBurrito;
-import OOP.Provided.CasaDeBurritoImpl;
-import OOP.Provided.CasaDeBurrito.*;
+import OOP.Provided.CasaDeBurrito.CasaDeBurritoAlreadyInSystemException;
+import OOP.Provided.CasaDeBurrito.CasaDeBurritoNotInSystemException;
+import OOP.Provided.CartelDeNachos;
 
 public class CartelDeNachosImpl implements CartelDeNachos
 {
@@ -29,7 +35,7 @@ public class CartelDeNachosImpl implements CartelDeNachos
 
     @Override
     public CasaDeBurrito addCasaDeBurrito(int id, String name, int dist, Set<String> menu)
-            throws CasaDeBurritoAlreadyInSystemException 
+            throws CasaDeBurritoAlreadyInSystemException
     {
         if (this.casas.containsKey(id))
             throw new CasaDeBurritoAlreadyInSystemException();
@@ -39,7 +45,7 @@ public class CartelDeNachosImpl implements CartelDeNachos
     }
 
     @Override
-    public Collection<Profesor> registeredProfesores() 
+    public Collection<Profesor> registeredProfesores()
     {
         Set<Profesor> result = new HashSet<Profesor>();
         for (Profesor profesor : profesors.values()) {
@@ -61,7 +67,7 @@ public class CartelDeNachosImpl implements CartelDeNachos
     }
 
     @Override
-    public Profesor getProfesor(int id) throws ProfesorNotInSystemException 
+    public Profesor getProfesor(int id) throws ProfesorNotInSystemException
     {
         if (!profesors.containsKey(id))
             throw new ProfesorNotInSystemException();
