@@ -9,10 +9,7 @@ import OOP.Solution.CartelDeNachosImpl;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -106,6 +103,8 @@ public class CartelDeNachosImplTest {
         }
 
         assertEquals(2, CartelDeNachos1.registeredProfesores().size());
+        Collection<Profesor> t = CartelDeNachos1.registeredProfesores();
+        boolean a = t.contains(Profesor1);
         assertTrue(CartelDeNachos1.registeredProfesores().contains(Profesor1));
     }
 

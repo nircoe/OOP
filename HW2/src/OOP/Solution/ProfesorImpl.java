@@ -1,11 +1,10 @@
 package OOP.Solution;
 
-
 import OOP.Provided.CasaDeBurrito;
 import OOP.Provided.Profesor;
-
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ProfesorImpl implements Profesor
 {
@@ -18,15 +17,15 @@ public class ProfesorImpl implements Profesor
     public ProfesorImpl(int id, String name) {
         this.id = id;
         this.name = name;
-        this.friends = new HashSet<Profesor>();
-        this.favorites = new HashSet<CasaDeBurrito>();
+        this.friends = new HashSet<>();
+        this.favorites = new HashSet<>();
     }
 
     public ProfesorImpl(Profesor other) {
         this.id = other.getId();
         this.name = ((ProfesorImpl) other).name;
-        this.friends = other.getFriends();
-        this.favorites = new HashSet<CasaDeBurrito>(other.favorites());
+        this.friends = ((ProfesorImpl) other).friends;
+        this.favorites = ((ProfesorImpl) other).favorites;
     }
 
     @Override
@@ -38,153 +37,151 @@ public class ProfesorImpl implements Profesor
     public Profesor favorite(CasaDeBurrito c)
             throws UnratedFavoriteCasaDeBurritoException
     {
-        if (c.isRatedBy(this))
-            this.favorites.add(c);
-        else
-            throw new UnratedFavoriteCasaDeBurritoException();
+        if (c.isRatedBy(this)) favorites.add(c);
+        else throw new UnratedFavoriteCasaDeBurritoException();
+
         return this;
     }
 
     @Override
     public Collection<CasaDeBurrito> favorites()
     {
-        return new HashSet<CasaDeBurrito>(this.favorites);
+        return new HashSet<>(this.favorites);
     }
 
     @Override
     public Profesor addFriend(Profesor p) throws SameProfesorException, ConnectionAlreadyExistsException {
-        if (this.id == p.getId())
-            throw new SameProfesorException();
-        if (this.friends.contains(p))
-            throw new ConnectionAlreadyExistsException();
+        if (id == p.getId()) throw new SameProfesorException();
+        if (friends.contains(p)) throw new ConnectionAlreadyExistsException();
+
         friends.add(p);
-        if(!(p.getFriends().contains(p)))
-            p.addFriend(this);
         return this;
     }
 
     @Override
     public Set<Profesor> getFriends() 
     {
-        return new HashSet<Profesor>(this.friends);
+        return friends
+                .stream()
+                .map(ProfesorImpl::new)
+                .collect(Collectors.toSet());
     }
 
     @Override
     public Set<Profesor> filteredFriends(Predicate<Profesor> p) {
-        Set<Profesor> result = new HashSet<Profesor>();
-        for (Profesor f : friends) 
-        {
-            if (p.test(f)) 
-            {
-                result.add(f);
-            }
-        }
-        return result;
+        return friends
+                .stream()
+                .filter(p)
+                .map(ProfesorImpl::new)
+                .collect(Collectors.toSet());
     }
 
     @Override
     public Collection<CasaDeBurrito> favoritesByRating(int rLimit)
     {
-        ArrayList<CasaDeBurrito> result = new ArrayList<CasaDeBurrito>();
-        for (CasaDeBurrito favorite : favorites)
-        {
-            if (favorite.averageRating() >= rLimit)
-                result.add(favorite);
-        }
-        result.sort(new CustomComparator());
-        return result;
+        return favorites
+                .stream()
+                .filter(c -> c.averageRating() >= rLimit)
+                .sorted(new RatingComparator())
+                .collect(Collectors.toList());
     }
 
     @Override
     public Collection<CasaDeBurrito> favoritesByDist(int dLimit)
     {
-        ArrayList<CasaDeBurrito> result = new ArrayList<CasaDeBurrito>();
-        for (CasaDeBurrito favorite : favorites)
-        {
-            if (favorite.averageRating() <= dLimit)
-                result.add(favorite);
-        }
-        result.sort(new CustomComparator());
-        return result;
+        return favorites
+                .stream()
+                .filter(c -> c.distance() <= dLimit)
+                .sorted(new DistanceComparator())
+                .collect(Collectors.toList());
     }
 
     @Override
     public String toString() 
     {
-        String str = "Profesor: " + this.name + ".";
-        str += "\nId: " + this.id + ".";
-        str += "\nFavorites: ";
-        Object[] favorites = this.favorites.toArray();
-        Arrays.sort(favorites);
-        for (int i = 0; i < favorites.length; i++)
-        {
-            str += ((CasaDeBurrito) favorites[i]).getName();
-            if(i < favorites.length - 1)
-                str += ", ";
-            else
-                str += ".";
-        }
-        if (favorites.length == 0)
-            str += ".";
-        return str;
+        return "Profesor: " +
+                name +
+                ".\n" +
+                "Id: " +
+                id +
+                ".\n" +
+                "Favorites: " +
+                favorites
+                        .stream()
+                        .sorted()
+                        .map(CasaDeBurrito::getName)
+                        .collect(Collectors.joining(", ")) +
+                ".";
     }
 
     @Override
     public int compareTo(Profesor o) 
     {
-        if (this.id < o.getId())
-            return -1;
-        else if (this.id > o.getId())
-            return 1;
-        else
-            return 0;
+        return Integer.compare(this.id, o.getId());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProfesorImpl profesor = (ProfesorImpl) o;
+        return id == profesor.id;
+    }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (!(obj instanceof Profesor)) return false;
-
-        return ((Profesor) obj).getId() == this.id;
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
     public Collection<CasaDeBurrito> filterAndSortFavorites(Comparator<CasaDeBurrito> comp,
             Predicate<CasaDeBurrito> p) {
-        ArrayList<CasaDeBurrito> result = new ArrayList<CasaDeBurrito>();
-        for (CasaDeBurrito favorite : favorites)
-        {
-            if (p.test(favorite))
-                result.add(favorite);
-        }
-        result.sort(comp);
-        return result;
+        return favorites
+                .stream()
+                .filter(p)
+                .map(CasaDeBurritoImpl::new)
+                .sorted()
+                .collect(Collectors.toList());
     }
-    
-    
 }
 
-class CustomComparator implements Comparator<CasaDeBurrito> {
+class RatingComparator implements Comparator<CasaDeBurrito> {
     @Override
     public int compare(CasaDeBurrito o1, CasaDeBurrito o2) {
-        if (o1.averageRating() > o2.averageRating())
+        if (o1.averageRating() < o2.averageRating())
             return 1;
-        else if (o1.averageRating() < o2.averageRating())
+        else if (o1.averageRating() > o2.averageRating())
             return -1;
         else
         {
-            if (o1.distance() < o2.distance())
+            if (o1.distance() > o2.distance())
                 return 1;
-            else if (o1.distance() > o2.distance())
+            else if (o1.distance() < o2.distance())
                 return -1;
             else
             {
-                if (o1.getId() < o2.getId())
-                    return 1;
-                else if (o1.getId() > o2.getId())
-                    return -1;
-                else return 0;
+                return Integer.compare(o1.getId(), o2.getId());
+            }
+        }
+    }
+}
+
+class DistanceComparator implements Comparator<CasaDeBurrito> {
+    @Override
+    public int compare(CasaDeBurrito o1, CasaDeBurrito o2) {
+        if (o1.distance() > o2.distance())
+            return 1;
+        else if (o1.distance() < o2.distance())
+            return -1;
+        else
+        {
+            if (o1.averageRating() < o2.averageRating())
+                return 1;
+            else if (o1.averageRating() > o2.averageRating())
+                return -1;
+            else
+            {
+                return Integer.compare(o1.getId(), o2.getId());
             }
         }
     }

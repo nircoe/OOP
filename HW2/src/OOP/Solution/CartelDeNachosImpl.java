@@ -1,6 +1,7 @@
 package OOP.Solution;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import OOP.Provided.Profesor;
 import OOP.Provided.Profesor.ProfesorAlreadyInSystemException;
@@ -19,8 +20,8 @@ public class CartelDeNachosImpl implements CartelDeNachos
 
     public CartelDeNachosImpl()
     {
-        profesors = new HashMap<Integer, Profesor>();
-        casas = new HashMap<Integer, CasaDeBurrito>();
+        profesors = new HashMap<>();
+        casas = new HashMap<>();
     }
 
     @Override
@@ -28,6 +29,7 @@ public class CartelDeNachosImpl implements CartelDeNachos
     {
         if (this.profesors.containsKey(id))
             throw new ProfesorAlreadyInSystemException();
+
         ProfesorImpl p = new ProfesorImpl(id, name);
         this.profesors.put(id, p);
         return p;
@@ -39,6 +41,7 @@ public class CartelDeNachosImpl implements CartelDeNachos
     {
         if (this.casas.containsKey(id))
             throw new CasaDeBurritoAlreadyInSystemException();
+
         CasaDeBurritoImpl c = new CasaDeBurritoImpl(id, name, dist, menu);
         this.casas.put(id, c);
         return c;
@@ -47,23 +50,21 @@ public class CartelDeNachosImpl implements CartelDeNachos
     @Override
     public Collection<Profesor> registeredProfesores()
     {
-        Set<Profesor> result = new HashSet<Profesor>();
-        for (Profesor profesor : profesors.values()) {
-            Profesor profesorClone = new ProfesorImpl(profesor);
-            result.add(profesorClone);
-        }
-        return result;
+        return profesors
+                .values()
+                .stream()
+                .map(ProfesorImpl::new)
+                .collect(Collectors.toSet());
     }
 
     @Override
     public Collection<CasaDeBurrito> registeredCasasDeBurrito() 
     {
-        Set<CasaDeBurrito> result = new HashSet<CasaDeBurrito>();
-        for (CasaDeBurrito casa : casas.values()) {
-            CasaDeBurrito casaClone = new CasaDeBurritoImpl(casa);
-            result.add(casaClone);
-        }
-        return result;
+        return casas
+                .values()
+                .stream()
+                .map(CasaDeBurritoImpl::new)
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -92,6 +93,7 @@ public class CartelDeNachosImpl implements CartelDeNachos
             throw new ProfesorNotInSystemException();
         
         p1.addFriend(p2);
+        p2.addFriend(p1);
         return this;
     }
 
@@ -100,19 +102,14 @@ public class CartelDeNachosImpl implements CartelDeNachos
     {
         if (!profesors.containsKey(p.getId()))
             throw new ProfesorNotInSystemException();
-        
-        ArrayList<Profesor> friends = new ArrayList<>(p.getFriends());
-        friends.sort((a, b) -> a.compareTo(b));
-        ArrayList<CasaDeBurrito> result = new ArrayList<>();
-        for (Profesor profesor : friends) {
-            if (!profesors.containsKey(profesor.getId())) continue;
-            Collection<CasaDeBurrito> casasOfProfesor = profesor.favoritesByRating(0);
-            for (CasaDeBurrito casa : casasOfProfesor) {
-                if (result.contains(casa)) continue;
-                result.add(casa);
-            }
-        }
-        return result;
+
+        return p.getFriends()
+                .stream()
+                .sorted()
+                .filter(f -> profesors.containsKey(f.getId()))
+                .flatMap(f -> f.favoritesByRating(0).stream())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -120,19 +117,14 @@ public class CartelDeNachosImpl implements CartelDeNachos
     {
         if (!profesors.containsKey(p.getId()))
             throw new ProfesorNotInSystemException();
-        
-        ArrayList<Profesor> friends = new ArrayList<>(p.getFriends());
-        friends.sort((a, b) -> a.compareTo(b));
-        ArrayList<CasaDeBurrito> result = new ArrayList<>();
-        for (Profesor profesor : friends) {
-            if (!profesors.containsKey(profesor.getId())) continue;
-            Collection<CasaDeBurrito> casasOfProfesor = profesor.favoritesByDist(Integer.MAX_VALUE);
-            for (CasaDeBurrito casa : casasOfProfesor) {
-                if (result.contains(casa)) continue;
-                result.add(casa);
-            }
-        }
-        return result;
+
+        return p.getFriends()
+                .stream()
+                .sorted()
+                .filter(f -> profesors.containsKey(f.getId()))
+                .flatMap(f -> f.favoritesByDist(Integer.MAX_VALUE).stream())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -147,5 +139,44 @@ public class CartelDeNachosImpl implements CartelDeNachos
     {
         return null;
     }
-    
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+
+        str.append("Registered profesores: ");
+        str.append(profesors
+                .values()
+                .stream()
+                .sorted()
+                .map(p -> String.valueOf(p.getId()))
+                .collect(Collectors.joining(", ")));
+        str.append(".\n");
+
+        str.append("Registered casas de burrito: ");
+        str.append(casas
+                .values()
+                .stream()
+                .sorted()
+                .map(c -> String.valueOf(c.getId()))
+                .collect(Collectors.joining(", ")));
+        str.append(".\n");
+
+        str.append("Profesores:\n");
+        profesors.keySet().forEach(id -> {
+            str.append(id);
+            str.append(" -> [");
+            str.append(profesors
+                    .get(id)
+                    .getFriends()
+                    .stream()
+                    .sorted()
+                    .map(p -> String.valueOf(p.getId()))
+                    .collect(Collectors.joining(", ")));
+            str.append("].\n");
+        });
+        str.append("End profesores.");
+
+        return str.toString();
+    }
 }

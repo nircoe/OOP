@@ -3,6 +3,7 @@ package OOP.Solution;
 import OOP.Provided.CasaDeBurrito;
 import OOP.Provided.Profesor;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CasaDeBurritoImpl implements CasaDeBurrito
 {
@@ -22,7 +23,7 @@ public class CasaDeBurritoImpl implements CasaDeBurrito
         this.menu = new HashSet<>(menu);
         this.rate_cnt = 0;
         this.rate_sum = 0;
-        this.rates = new HashMap<Integer, Integer>();
+        this.rates = new HashMap<>();
     }
 
     public CasaDeBurritoImpl(CasaDeBurrito other)
@@ -30,10 +31,10 @@ public class CasaDeBurritoImpl implements CasaDeBurrito
         this.id = other.getId();
         this.name = other.getName();
         this.dist = other.distance();
-        this.menu = new HashSet<String>(((CasaDeBurritoImpl) other).menu);
+        this.menu = new HashSet<>(((CasaDeBurritoImpl) other).menu);
         this.rate_cnt = other.numberOfRates();
         this.rate_sum = ((CasaDeBurritoImpl) other).rate_sum;
-        this.rates = new HashMap<Integer, Integer>(((CasaDeBurritoImpl) other).rates);
+        this.rates = new HashMap<>(((CasaDeBurritoImpl) other).rates);
     }
 
     @Override
@@ -57,9 +58,7 @@ public class CasaDeBurritoImpl implements CasaDeBurrito
     @Override
     public boolean isRatedBy(Profesor p)
     {
-        if (this.rates.containsKey(p.getId()))
-            return true;
-        return false;
+        return this.rates.containsKey(p.getId());
     }
 
     @Override
@@ -99,51 +98,41 @@ public class CasaDeBurritoImpl implements CasaDeBurrito
     @Override
     public String toString()
     {
-        StringBuilder str = new StringBuilder("CasaDeBurrito: " + this.name).append(".");
-        str.append("\nId: ").append(this.id).append(".");
-        str.append("\nDistance: ").append(this.dist).append(".");
-        str.append("\nMenu: ");
-        Object[] menu = this.menu.toArray();
-        Arrays.sort(menu);
-        for (int i = 0; i < menu.length; i++)
-        {
-            str.append(menu[i].toString());
-            if(i < menu.length - 1)
-                str.append(", ");
-            else
-                str.append(".");
-        }
-        if (menu.length == 0)
-            str.append(".");
-        return str.toString();
+
+        return "CasaDeBurrito: " +
+                name +
+                ".\n" +
+                "Id: " +
+                id +
+                ".\n" +
+                "Distance: " +
+                this.dist +
+                ".\n" +
+                "Menu: " +
+                menu
+                        .stream()
+                        .sorted()
+                        .map(String::toString)
+                        .collect(Collectors.joining(", ")) +
+                ".";
     }
 
     @Override
     public int compareTo(CasaDeBurrito o) 
     {
-        if (this.id < o.getId())
-            return -1;
-        else if (this.id > o.getId())
-            return 1;
-        else
-            return 0;
+        return Integer.compare(this.id, o.getId());
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (!(obj instanceof CasaDeBurrito)) return false;
-        return ((CasaDeBurrito) obj).getId() == this.id;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CasaDeBurritoImpl that = (CasaDeBurritoImpl) o;
+        return id == that.id;
     }
 
-    /*
-    public int profesorRate(Profesor p)
-    {
-        int id = p.getId();
-        if (this.rates.containsKey(id))
-            return this.rates.get(id);
-        return -1;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
-    */
-
 }
