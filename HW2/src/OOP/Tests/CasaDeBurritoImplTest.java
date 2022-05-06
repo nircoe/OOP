@@ -24,6 +24,7 @@ public class CasaDeBurritoImplTest {
 
         assertEquals(1, CasaDeBurrito.getId());
         assertEquals(2, CasaDeBurrito.distance());
+        assertEquals("Pizza Place", CasaDeBurrito.getName());
     }
 
     @Test
@@ -55,15 +56,28 @@ public class CasaDeBurritoImplTest {
             assertTrue(true);
         }
 
+        assertFalse(CasaDeBurrito.isRatedBy(Profesor1));
+        assertFalse(CasaDeBurrito.isRatedBy(Profesor2));
+        assertFalse(CasaDeBurrito.isRatedBy(Profesor3));
+
         assertEquals(0, CasaDeBurrito.numberOfRates());
         assertEquals(0, CasaDeBurrito.averageRating(), DELTA);
         CasaDeBurrito.rate(Profesor1, 0);
+        assertTrue(CasaDeBurrito.isRatedBy(Profesor1));
+        assertFalse(CasaDeBurrito.isRatedBy(Profesor2));
+        assertFalse(CasaDeBurrito.isRatedBy(Profesor3));
         assertEquals(1, CasaDeBurrito.numberOfRates());
         assertEquals(0, CasaDeBurrito.averageRating(), DELTA);
         CasaDeBurrito.rate(Profesor2, 1);
+        assertTrue(CasaDeBurrito.isRatedBy(Profesor1));
+        assertTrue(CasaDeBurrito.isRatedBy(Profesor2));
+        assertFalse(CasaDeBurrito.isRatedBy(Profesor3));
         assertEquals(2, CasaDeBurrito.numberOfRates());
         assertEquals(0.5, CasaDeBurrito.averageRating(), DELTA);
         CasaDeBurrito.rate(Profesor3, 2);
+        assertTrue(CasaDeBurrito.isRatedBy(Profesor1));
+        assertTrue(CasaDeBurrito.isRatedBy(Profesor2));
+        assertTrue(CasaDeBurrito.isRatedBy(Profesor3));
         assertEquals(3, CasaDeBurrito.numberOfRates());
         assertEquals(1, CasaDeBurrito.averageRating(), DELTA);
         CasaDeBurrito.rate(Profesor1, 5);
@@ -72,6 +86,10 @@ public class CasaDeBurritoImplTest {
         CasaDeBurrito.rate(Profesor2, 5).rate(Profesor3, 5);
         assertEquals(3, CasaDeBurrito.numberOfRates());
         assertEquals(5.0, CasaDeBurrito.averageRating(), DELTA);
+
+        assertTrue(CasaDeBurrito.isRatedBy(Profesor1));
+        assertTrue(CasaDeBurrito.isRatedBy(Profesor2));
+        assertTrue(CasaDeBurrito.isRatedBy(Profesor3));
 
     }
 

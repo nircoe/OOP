@@ -183,6 +183,8 @@ public class CartelDeNachosImpl implements CartelDeNachos
     @Override
     public List<Integer> getMostPopularRestaurantsIds() 
     {
+        if(this.casas.isEmpty() || this.profesors.isEmpty())
+            return new ArrayList<Integer>();
         Map<Integer, Integer> scores = new HashMap<Integer, Integer>(); // id -> counter
         for (Integer id : this.casas.keySet())
         {
@@ -199,21 +201,18 @@ public class CartelDeNachosImpl implements CartelDeNachos
             }
         }
         List<Integer> list = new ArrayList<Integer>();
-        int index = this.casas.size() - 1;
-        int max;
-        while (scores.size() > 0)
+        int max = (int)(scores.values().toArray())[0];
+        for(Integer v: scores.values())
         {
-            max = (int)(scores.keySet().toArray())[0];
-            for(Integer id: scores.keySet())
-            {
-                if (scores.get(id) > scores.get(max))
-                    max = id;
-            }
-            list.add(index, max);
-            index--;
-            scores.remove(max);
+            if (v > max)
+                max = v;
         }
-        return list;
+        for(Integer id: scores.keySet())
+        {
+            if(scores.get(id) == max)
+                list.add(id);
+        }
+        return list.stream().sorted().toList();
     }
 
     @Override

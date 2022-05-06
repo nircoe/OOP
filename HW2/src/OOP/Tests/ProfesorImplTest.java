@@ -2,14 +2,12 @@ package OOP.Tests;
 
 import OOP.Provided.CasaDeBurrito;
 import OOP.Provided.Profesor;
-import OOP.Solution.ProfesorImpl;
 import OOP.Solution.CasaDeBurritoImpl;
+import OOP.Solution.ProfesorImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -73,6 +71,7 @@ public class ProfesorImplTest {
 
     @Test
     public void favorite() throws Exception {
+        init();
         try {
             ProfesorMinusOne.favorite(CasaDeBurrito3);
             fail();
@@ -169,6 +168,7 @@ public class ProfesorImplTest {
 
     @Test
     public void addFriend() throws Exception {
+        init();
         assertTrue(Profesor23.getFriends().isEmpty());
 
         try {
@@ -200,6 +200,63 @@ public class ProfesorImplTest {
         assertTrue(Profesor42.getFriends().contains(Profesor69));
         assertEquals(Profesor42.getFriends().size() , 2);
         assertFalse(Profesor42.getFriends().contains(Profesor17));
+    }
+
+    @Test
+    public void filter() throws Exception {
+        Profesor42.addFriend(Profesor23).addFriend(Profesor69);
+
+        Collection<Profesor> filtered = Profesor42.filteredFriends(p -> true);
+        assertTrue(filtered.contains(Profesor23));
+        assertTrue(filtered.contains(Profesor69));
+        assertEquals(filtered.size() , 2);
+
+        assertTrue(Profesor42.filteredFriends(p -> false).isEmpty());
+
+        filtered.add(Profesor17);
+        filtered.remove(Profesor69);
+
+        assertTrue(Profesor42.getFriends().contains(Profesor23));
+        assertTrue(Profesor42.getFriends().contains(Profesor69));
+        assertEquals(Profesor42.getFriends().size() , 2);
+        assertFalse(Profesor42.getFriends().contains(Profesor17));
+
+        filtered = Profesor42.filteredFriends(p -> p.getId() > 30);
+        assertFalse(filtered.contains(Profesor23));
+        assertTrue(filtered.contains(Profesor69));
+        assertEquals(filtered.size() , 1);
+    }
+
+    @Test
+    public void filterAndSort() throws Exception {
+        CasaDeBurrito3.rate(Profesor42, 1);
+        CasaDeBurritoMinus3.rate(Profesor42, 1);
+        CasaDeBurrito7.rate(Profesor42, 1);
+        CasaDeBurritoAngels.rate(Profesor42, 1);
+        CasaDeBurrito23.rate(Profesor42, 1);
+
+        Profesor42.favorite(CasaDeBurrito3);
+        Profesor42.favorite(CasaDeBurritoMinus3);
+        Profesor42.favorite(CasaDeBurrito7);
+        Profesor42.favorite(CasaDeBurritoAngels);
+        Profesor42.favorite(CasaDeBurrito23);
+
+        List<CasaDeBurrito> filtered = new LinkedList<>(Profesor42.filterAndSortFavorites(Comparable::compareTo, p -> true));
+
+        assertEquals(5, filtered.size());
+        assertEquals(CasaDeBurritoMinus3, filtered.get(0));
+        assertEquals(CasaDeBurrito3, filtered.get(1));
+        assertEquals(CasaDeBurrito7, filtered.get(2));
+        assertEquals(CasaDeBurritoAngels, filtered.get(3));
+        assertEquals(CasaDeBurrito23, filtered.get(4));
+
+        filtered = new LinkedList<>(Profesor42.filterAndSortFavorites(Comparator.comparingInt(CasaDeBurrito::distance), p -> p.getId() > 0));
+
+        assertEquals(4, filtered.size());
+        assertEquals(CasaDeBurritoAngels, filtered.get(0));
+        assertEquals(CasaDeBurrito7, filtered.get(1));
+        assertEquals(CasaDeBurrito23, filtered.get(2));
+        assertTrue(filtered.contains(CasaDeBurrito3));
     }
 
     @Test

@@ -103,8 +103,6 @@ public class CartelDeNachosImplTest {
         }
 
         assertEquals(2, CartelDeNachos1.registeredProfesores().size());
-        Collection<Profesor> t = CartelDeNachos1.registeredProfesores();
-        boolean a = t.contains(Profesor1);
         assertTrue(CartelDeNachos1.registeredProfesores().contains(Profesor1));
     }
 
@@ -310,6 +308,13 @@ public class CartelDeNachosImplTest {
         assertTrue(CartelDeNachos3.getRecommendation(ProfesorD, CasaDeBurrito5, 2));
         assertTrue(CartelDeNachos3.getRecommendation(ProfesorD, CasaDeBurrito0, 2));
         assertTrue(CartelDeNachos3.getRecommendation(ProfesorD, CasaDeBurrito8, 2));
+    }
+
+    @Test
+    public void getMostPopularRestaurantsIds() throws Exception {
+        assertTrue(CartelDeNachos0.getMostPopularRestaurantsIds().isEmpty());
+        assertEquals(Collections.singletonList(0), CartelDeNachos1.getMostPopularRestaurantsIds());
+        assertEquals(Arrays.asList(0, 1, 2, 3), CartelDeNachos3.getMostPopularRestaurantsIds());
     }
 
     private static CartelDeNachos CartelDeNachos1;
