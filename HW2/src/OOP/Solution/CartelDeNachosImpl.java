@@ -127,8 +127,12 @@ public class CartelDeNachosImpl implements CartelDeNachos
                 .collect(Collectors.toList());
     }
 
-    private boolean getRecommendationAUX(Profesor p, CasaDeBurrito c, int t, Map<Integer, Profesor> m, int dist, Boolean not_favorite)
+    private boolean[] getRecommendationAUX(Profesor p, CasaDeBurrito c, int t, Map<Integer, Profesor> m, int dist, boolean b)
     {
+        Map<Integer, Profesor> copy = new HashMap<Integer, Profesor>(m);
+        boolean[] r = new boolean[2];
+        r[0] = true;
+        r[1] = b;
         Set<Profesor> friends = p.getFriends();
         for (Profesor f : friends)
         {
@@ -136,15 +140,22 @@ public class CartelDeNachosImpl implements CartelDeNachos
             {
                 if (f.favorites().contains(c))
                 {
-                    not_favorite = false;
-                    if(dist > t)
-                        return false;
-                }  
-                m.put(f.getId(), f);
-                return getRecommendationAUX(f, c, t, m, dist + 1, not_favorite);
+                    r[1] = false;
+                    if(dist > t) {
+                        r[0] = false;
+                        return r;
+                    }
+                }
+                for(Profesor friend: friends)
+                {
+                    m.putIfAbsent(friend.getId(), friend);
+                }
+                r = getRecommendationAUX(f, c, t, m, dist + 1, r[1]);
+                m = copy;
+                if(r[0] == false) return r;
             }
         }
-        return true;
+        return r;
     }
 
     @Override
@@ -159,15 +170,14 @@ public class CartelDeNachosImpl implements CartelDeNachos
             throw new ImpossibleConnectionException();
         Map<Integer, Profesor> m = new HashMap<Integer, Profesor>();
         m.put(p.getId(), p);
-        Boolean not_favorite = true;
-        boolean r = getRecommendationAUX(p, c, t, m, 0, not_favorite);
-        if (not_favorite)
+        boolean[] r = getRecommendationAUX(p, c, t, m, 1, true);
+        if (r[1])
         {
             if (p.favorites().contains(c))
                 return true;
             return false;
         }
-        return r;
+        return r[0];
     }
 
     @Override
