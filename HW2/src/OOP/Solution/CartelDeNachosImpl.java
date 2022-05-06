@@ -127,17 +127,83 @@ public class CartelDeNachosImpl implements CartelDeNachos
                 .collect(Collectors.toList());
     }
 
+    private boolean getRecommendationAUX(Profesor p, CasaDeBurrito c, int t, Map<Integer, Profesor> m, int dist, Boolean not_favorite)
+    {
+        Set<Profesor> friends = p.getFriends();
+        for (Profesor f : friends)
+        {
+            if(!(m.containsValue(f)))
+            {
+                if (f.favorites().contains(c))
+                {
+                    not_favorite = false;
+                    if(dist > t)
+                        return false;
+                }  
+                m.put(f.getId(), f);
+                return getRecommendationAUX(f, c, t, m, dist + 1, not_favorite);
+            }
+        }
+        return true;
+    }
+
     @Override
     public boolean getRecommendation(Profesor p, CasaDeBurrito c, int t) throws ProfesorNotInSystemException,
             CasaDeBurritoNotInSystemException, CartelDeNachos.ImpossibleConnectionException 
     {
-        return false;
+        if (!(this.profesors.containsValue(p)))
+            throw new ProfesorNotInSystemException();
+        if (!(this.casas.containsValue(c)))
+            throw new CasaDeBurritoNotInSystemException();
+        if (t < 0)
+            throw new ImpossibleConnectionException();
+        Map<Integer, Profesor> m = new HashMap<Integer, Profesor>();
+        m.put(p.getId(), p);
+        Boolean not_favorite = true;
+        boolean r = getRecommendationAUX(p, c, t, m, 0, not_favorite);
+        if (not_favorite)
+        {
+            if (p.favorites().contains(c))
+                return true;
+            return false;
+        }
+        return r;
     }
 
     @Override
     public List<Integer> getMostPopularRestaurantsIds() 
     {
-        return null;
+        Map<Integer, Integer> scores = new HashMap<Integer, Integer>(); // id -> counter
+        for (Integer id : this.casas.keySet())
+        {
+            scores.put(id, 0);
+        }
+        for (Profesor p : this.profesors.values())
+        {
+            for (Profesor f : p.getFriends()) {
+                for (CasaDeBurrito c : f.favorites()) {
+                    int casaId = c.getId();
+                    int prevscore = scores.get(casaId);
+                    scores.replace(casaId, prevscore + 1);
+                }
+            }
+        }
+        List<Integer> list = new ArrayList<Integer>();
+        int index = this.casas.size() - 1;
+        int max;
+        while (scores.size() > 0)
+        {
+            max = (int)(scores.keySet().toArray())[0];
+            for(Integer id: scores.keySet())
+            {
+                if (scores.get(id) > scores.get(max))
+                    max = id;
+            }
+            list.add(index, max);
+            index--;
+            scores.remove(max);
+        }
+        return list;
     }
 
     @Override
