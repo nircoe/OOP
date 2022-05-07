@@ -212,7 +212,7 @@ public class CartelDeNachosImpl implements CartelDeNachos
             if(scores.get(id) == max)
                 list.add(id);
         }
-        return list.stream().sorted().toList();
+        return list.stream().sorted().collect(Collectors.toList());
     }
 
     @Override

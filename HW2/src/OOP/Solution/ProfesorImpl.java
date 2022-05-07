@@ -140,7 +140,7 @@ public class ProfesorImpl implements Profesor
                 .stream()
                 .filter(p)
                 .map(CasaDeBurritoImpl::new)
-                .sorted()
+                .sorted(comp)
                 .collect(Collectors.toList());
     }
 }
