@@ -1,0 +1,3 @@
+C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/HW5/part1/build/CMakeFiles/part1.dir
+C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/HW5/part1/build/CMakeFiles/edit_cache.dir
+C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/HW5/part1/build/CMakeFiles/rebuild_cache.dir
