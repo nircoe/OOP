@@ -3,7 +3,7 @@
 
 enum CellType
 {
-    Empty,
+    EMPTY,
     X,
     A,
     B,

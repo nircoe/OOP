@@ -8,7 +8,7 @@ template <CellType T, Direction D, int N>
 struct BoardCell
 {
     constexpr static CellType type = T;
-    constexpr static Direction direction = N;
+    constexpr static Direction direction = D;
     constexpr static int length = N;
 };
 
