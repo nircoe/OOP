@@ -83,7 +83,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/CMake/share/cmake-3.24/Modules/Platform/Windows-windres.cmake"
   "C:/Program Files/CMake/share/cmake-3.24/Modules/Platform/Windows.cmake"
   "C:/Program Files/CMake/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake"
-  "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/HW5/part1/CMakeLists.txt"
+  "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/CMakeLists.txt"
   "CMakeFiles/3.24.0-rc1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.24.0-rc1/CMakeRCCompiler.cmake"
   "CMakeFiles/3.24.0-rc1/CMakeSystem.cmake"

@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\USER\OneDrive - Technion\Desktop\Studying\Semester_D\OOP\HW5\part1"
+CMAKE_SOURCE_DIR = "C:\Users\USER\OneDrive - Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\USER\OneDrive - Technion\Desktop\Studying\Semester_D\OOP\HW5\part1\build"
+CMAKE_BINARY_DIR = "C:\Users\USER\OneDrive - Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\build"
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -83,14 +83,14 @@ clean: CMakeFiles/part1.dir/clean
 CMakeFiles/part1.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\part1.dir\build.make CMakeFiles/part1.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\part1.dir\build.make CMakeFiles/part1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\USER\OneDrive - Technion\Desktop\Studying\Semester_D\OOP\HW5\part1\build\CMakeFiles" --progress-num=1,2 "Built target part1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\USER\OneDrive - Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\build\CMakeFiles" --progress-num=1,2 "Built target part1"
 .PHONY : CMakeFiles/part1.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/part1.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\USER\OneDrive - Technion\Desktop\Studying\Semester_D\OOP\HW5\part1\build\CMakeFiles" 2
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\USER\OneDrive - Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\build\CMakeFiles" 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/part1.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\USER\OneDrive - Technion\Desktop\Studying\Semester_D\OOP\HW5\part1\build\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\USER\OneDrive - Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\build\CMakeFiles" 0
 .PHONY : CMakeFiles/part1.dir/rule
 
 # Convenience name for target.

@@ -1,5 +1,5 @@
 CMakeFiles/part1.dir/Part1Examples.cpp.obj: \
- C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\HW5\part1\Part1Examples.cpp \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\Part1Examples.cpp \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++/iostream \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
@@ -131,6 +131,23 @@ CMakeFiles/part1.dir/Part1Examples.cpp.obj: \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++/bits/ostream.tcc \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++/istream \
  C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++/bits/istream.tcc \
- C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\HW5\part1\Observer.h \
- C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\HW5\part1\Subject.h \
- C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\HW5\part1\OOP5EventException.h
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\Observer.h \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\Subject.h \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\OOP5EventException.h \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\tests/Part2Main.h \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\tests/staff/Part2Examples.h \
+ C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++/sstream \
+ C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++/bits/sstream.tcc \
+ C:/Users/USER/OneDrive\ -\ Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/Subject.h \
+ C:/Users/USER/OneDrive\ -\ Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/tests/my/TestUtils.h \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\tests/my/MyTest.h \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\tests/my/TestUtils.h \
+ C:/Users/USER/OneDrive\ -\ Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/Subject.h \
+ C:/Users/USER/OneDrive\ -\ Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/Observer.h \
+ C:/Users/USER/OneDrive\ -\ Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/OOP5EventException.h \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\tests/partner/PartnerPartTwoMain.h \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\tests/partner/PartTwoObserverTests.h \
+ C:/Users/USER/OneDrive\ -\ Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/Observer.h \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\tests/partner/BaseTestFile.h \
+ C:\Users\USER\OneDrive\ -\ Technion\Desktop\Studying\Semester_D\OOP\OOP\HW5\part1\tests/partner/PartTwoSubjectTests.h \
+ C:/Users/USER/OneDrive\ -\ Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/Subject.h

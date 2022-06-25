@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/HW5/part1/build"
+			"value" : "c:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -455,7 +455,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/HW5/part1/build/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/build/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -527,7 +527,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/HW5/part1"
+			"value" : "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1207,7 +1207,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/HW5/part1/build"
+			"value" : "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/build"
 		},
 		{
 			"name" : "HW5_part1_IS_TOP_LEVEL",
@@ -1231,7 +1231,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/HW5/part1"
+			"value" : "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",

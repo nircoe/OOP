@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/HW5/part1/Part1Examples.cpp" "CMakeFiles/part1.dir/Part1Examples.cpp.obj" "gcc" "CMakeFiles/part1.dir/Part1Examples.cpp.obj.d"
+  "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/Part1Examples.cpp" "CMakeFiles/part1.dir/Part1Examples.cpp.obj" "gcc" "CMakeFiles/part1.dir/Part1Examples.cpp.obj.d"
   )
 
 # Targets to which this target links.

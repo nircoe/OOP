@@ -2,6 +2,7 @@
 
 #include "Observer.h"
 #include "Subject.h"
+#include "tests/Part2Main.h"
 
 class TemperatureSensor : public Subject<int> {};
 
@@ -49,6 +50,8 @@ int main()
     } catch(ObserverUnknownToSubject& e){
         std::cout << "Should be printed" << std::endl;
     }
+
+    part2Main();
 
     return 0;
 }

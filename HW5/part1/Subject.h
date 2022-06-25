@@ -6,7 +6,6 @@
 #include "OOP5EventException.h"
 #include "Observer.h"
 
-
 template<typename T>
 class Observer;
 
@@ -32,7 +31,7 @@ class Subject
             if(itr == &observer)
                 throw ObserverAlreadyKnownToSubject();
         }
-        if(head == nullptr)
+        if(last == nullptr)
         {
             head = &observer; // next and prev already nullptr since constructor
         }
@@ -50,8 +49,12 @@ class Subject
         {
             if(itr == &observer)
             {
-                itr->prev->next = itr->next;
-                itr->next->prev = itr->prev;
+                if(itr->prev)
+                    itr->prev->next = itr->next;
+                else // itr is head
+                    head = itr->next;
+                if(itr->next)
+                    itr->next->prev = itr->prev;
                 return;
             }
         }
