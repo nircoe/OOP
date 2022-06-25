@@ -59,21 +59,6 @@ struct Point
 template <typename GameBoard, typename... M>
 struct CheckSolution;
 
-template <typename GameBoard, typename M>
-struct CheckSolution<GameBoard, List<M>>
-{
-private:
-    typedef typename List<M>::head move;
-    constexpr static int row = GetVehicle<GameBoard, move::type, 0, 0>::R;
-    constexpr static int column = GetVehicle<GameBoard, move::type, 0, 0>::C;
-
-    typedef typename MoveVehicle<GameBoard, row, column, move::direction, move::amount>::board board_after_move;
-
-public:
-    constexpr static bool result = CheckWin<board_after_move>::result;
-
-};
-
 template <typename GameBoard, typename... M>
 struct CheckSolution<GameBoard, List<M...>>
 {
@@ -87,6 +72,21 @@ private:
 
 public:
     constexpr static bool result = CheckSolution<board_after_move, next_moves>::result;
+};
+
+template <typename GameBoard, typename M>
+struct CheckSolution<GameBoard, List<M>>
+{
+private:
+    typedef typename List<M>::head move;
+    constexpr static int row = GetVehicle<GameBoard, move::type, 0, 0>::R;
+    constexpr static int column = GetVehicle<GameBoard, move::type, 0, 0>::C;
+
+    typedef typename MoveVehicle<GameBoard, row, column, move::direction, move::amount>::board board_after_move;
+
+public:
+    constexpr static bool result = CheckWin<board_after_move>::result;
+
 };
 
 #endif
