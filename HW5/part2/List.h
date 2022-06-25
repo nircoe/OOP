@@ -61,32 +61,4 @@ struct SetAtIndex<0, U, List<T, TT...>>
     typedef typename PrependList<U, List<TT...>>::list list;
 };
 
-/* Help functions */
-template<int N, typename T>
-struct GetNth;
-
-template<int N, typename T, typename... TT >
-struct GetNth<N, List<T, TT...>>
-{
-    typedef typename GetNth<N-1, List<TT... >>::Head Head;
-};
-
-template<typename T, typename... TT>
-struct GetNth<0, List<T, TT...>>
-{
-    typedef T Head;
-};
-
-template <bool g, typename T, typename E>
-struct IF
-{
-    typedef T RET;
-};
-
-template <typename T, typename E>
-struct IF<false, T, E>
-{
-    typedef E RET;
-};
-
 #endif
