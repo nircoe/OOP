@@ -11,82 +11,56 @@
 #include "Utilities.h"
 #include "CellType.h"
 
-template <typename GameBoard, int R, int C>
-struct CheckEmptyUntillTheEnd
+template <typename GameBoard, int R, int C, int A>
+struct CheckEmptyUntilTheEnd
 {
 private:
-
     typedef typename GameBoard::board b;
     typedef typename GetAtIndex<R, b>::value row;
     typedef typename GetAtIndex<C, row>::value cell;
+    constexpr static bool isEmpty = cell::type == EMPTY || cell::type == X;
 
 public:
-
-    constexpr static bool result = 1;//(C == GameBoard::width) ? true : ((cell::type == EMPTY) ? CheckEmptyUntillTheEnd<GameBoard, R, C + 1>::result : false);
-
+    constexpr static bool result = ConditionalInteger<
+                              isEmpty,
+                              CheckEmptyUntilTheEnd<GameBoard, R, C + 1, A - 1>::result,
+                          false > ::value;
 };
 
 template <typename GameBoard, int R, int C>
-struct CheckWinAux
+struct CheckEmptyUntilTheEnd<GameBoard, R, C, -1>
 {
-private:
-
-    typedef typename GameBoard::board b;
-    typedef typename GetAtIndex<R, b>::value row;
-    typedef typename GetAtIndex<C, row>::value cell;
-    static_assert((R < GameBoard::length), "No red car in board");
-    constexpr static int next_R = (C < GameBoard::width) ? R : R + 1;
-    constexpr static int next_C = (C < GameBoard::width) ? C + 1 : 0;
-
-public:
-
-    constexpr static bool result = 1;//(cell::type == X) ? CheckEmptyUntillTheEnd<GameBoard, R, C + cell::length>::result : CheckWinAux<GameBoard, next_R, next_C>::result;
+    constexpr static bool result = true;
 };
 
 template <typename GameBoard>
 struct CheckWin
 {
-    constexpr static bool result = CheckWinAux<GameBoard, 0, 0>::result;
-};
-
-template<int R, int C>
-struct Point
-{
-    constexpr static int row = R;
-    constexpr static int column = C;
-};
-
-template <typename GameBoard, typename... M>
-struct CheckSolution;
-
-template <typename GameBoard, typename... M>
-struct CheckSolution<GameBoard, List<M...>>
-{
 private:
-    typedef typename List<M...>::head move;
-    typedef typename List<M...>::next next_moves;
-    constexpr static int row = 0;//GetVehicle<GameBoard, move::type, 0, 0>::row;
-    constexpr static int column = 0;//GetVehicle<GameBoard, move::type, 0, 0>::column;
-
-    //typedef typename MoveVehicle<GameBoard, row, column, move::direction, move::amount>::board board_after_move;
-
+    typedef FindCar<GameBoard, X, GameBoard::length - 1, GameBoard::width - 1> redCarPosition;
+    constexpr static bool isWin = CheckEmptyUntilTheEnd<GameBoard, redCarPosition::row, redCarPosition::column, GameBoard::width - redCarPosition::column - 1>::result;
 public:
-    constexpr static bool result = 1;//CheckSolution<board_after_move, next_moves>::result;
+    constexpr static bool result = isWin;
 };
 
 template <typename GameBoard, typename M>
-struct CheckSolution<GameBoard, List<M>>
+struct CheckSolution;
+
+template <typename GameBoard, typename M, typename... MM>
+struct CheckSolution<GameBoard, List<M, MM...>>
 {
 private:
-    typedef typename List<M>::head move;
-    constexpr static int row = 1;//GetVehicle<GameBoard, move::type, 0, 0>::R;
-    constexpr static int column = 1;//GetVehicle<GameBoard, move::type, 0, 0>::C;
-
-    //typedef typename MoveVehicle<GameBoard, row, column, move::direction, move::amount>::board board_after_move;
+    typedef FindCar<GameBoard, M::type, GameBoard::length - 1, GameBoard::width - 1> carPosition;
+    typedef typename MoveVehicle<GameBoard, carPosition::row, carPosition::column, M::direction, M::amount>::board newBoard;
 
 public:
-    constexpr static bool result = 1;//CheckWin<board_after_move>::result;
+    constexpr static bool result = CheckSolution<newBoard, List<MM...>>::result;
+};
 
+template <typename GameBoard>
+struct CheckSolution<GameBoard, List<>>
+{
+    constexpr static bool result = CheckWin<GameBoard>::result;
 };
 
 #endif
