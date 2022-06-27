@@ -110,7 +110,7 @@ public:
         "Selected cell direction is not valid");
     static_assert(getNextCellType() == EMPTY, "Move is not valid");
 
-    typedef typename MoveVehicleAux<GameBoard<new_b, GB::width, GB::length>, next_R, next_C, D, A, L - 1>::board board;
+    typedef typename MoveVehicleAux<GameBoard<new_b>, next_R, next_C, D, A, L - 1>::board board;
 };
 
 template <typename GB, int R, int C, Direction D, int A>
@@ -159,7 +159,7 @@ private:
     constexpr static int column = GetVehicle<GB, cell::type, 0, 0>::column;
 
 public:
-    typedef typename MoveVehicleAux<GameBoard<GB, GB::width, GB::length>, row, column, D, A, cell::length>::board board;
+    typedef typename MoveVehicleAux<GameBoard<GB>, row, column, D, A, cell::length>::board board;
 };
 
 

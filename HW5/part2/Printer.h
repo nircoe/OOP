@@ -13,8 +13,8 @@
 template<typename>
 struct Printer;
 
-template<typename List, int W, int L>
-struct Printer<GameBoard<List, W, L>>{
+template<typename List>
+struct Printer<GameBoard<List>>{
     static void print(std::ostream& output){
         output << "Game Board: " << std::endl << " ";
         Printer<List>::print(output);
