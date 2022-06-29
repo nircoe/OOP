@@ -4,31 +4,30 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part2
-BuildDirectory: C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part2/build
+SourceDirectory: /home/nir-nisim-co/OOP/HW5/part2
+BuildDirectory: /home/nir-nisim-co/OOP/HW5/part2/build
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: nircoe
+Site: csl3
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Win32-mingw32-make
+BuildName: Linux-c++
 
 # Subprojects
 LabelsForSubprojects: 
 
 # Submission information
 SubmitURL: http://
-SubmitInactivityTimeout: 
 
 # Dashboard start time
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part2"
-MakeCommand: C:/Program\ Files/CMake/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
+ConfigureCommand: "/home/mtm/cmake-3.17.0-Linux-x86_64/bin/cmake" "/home/nir-nisim-co/OOP/HW5/part2"
+MakeCommand: /home/mtm/cmake-3.17.0-Linux-x86_64/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 
 # version control
@@ -36,22 +35,22 @@ UpdateVersionOnly:
 
 # CVS options
 # Default is "-d -P -A"
-CVSCommand: 
-CVSUpdateOptions: 
+CVSCommand: CVSCOMMAND-NOTFOUND
+CVSUpdateOptions: -d -A -P
 
 # Subversion options
-SVNCommand: 
+SVNCommand: /usr/bin/svn
 SVNOptions: 
 SVNUpdateOptions: 
 
 # Git options
-GITCommand: 
+GITCommand: /usr/bin/git
 GITInitSubmodules: 
 GITUpdateOptions: 
 GITUpdateCustom: 
 
 # Perforce options
-P4Command: 
+P4Command: P4COMMAND-NOTFOUND
 P4Client: 
 P4Options: 
 P4UpdateOptions: 
@@ -63,8 +62,8 @@ UpdateOptions:
 UpdateType: 
 
 # Compiler info
-Compiler: C:/TDM-GCC-64/bin/x86_64-w64-mingw32-g++.exe
-CompilerVersion: 9.2.0
+Compiler: /usr/local/bin/c++
+CompilerVersion: 5.5.0
 
 # Dynamic analysis (MemCheck)
 PurifyCommand: 
@@ -72,17 +71,19 @@ ValgrindCommand:
 ValgrindCommandOptions: 
 DrMemoryCommand: 
 DrMemoryCommandOptions: 
-CudaSanitizerCommand: 
-CudaSanitizerCommandOptions: 
 MemoryCheckType: 
 MemoryCheckSanitizerOptions: 
-MemoryCheckCommand: MEMORYCHECK_COMMAND-NOTFOUND
+MemoryCheckCommand: /usr/bin/valgrind
 MemoryCheckCommandOptions: 
 MemoryCheckSuppressionFile: 
 
 # Coverage
-CoverageCommand: C:/TDM-GCC-64/bin/gcov.exe
+CoverageCommand: /usr/bin/gcov
 CoverageExtraFlags: -l
+
+# Cluster commands
+SlurmBatchCommand: SLURM_SBATCH_COMMAND-NOTFOUND
+SlurmRunCommand: SLURM_SRUN_COMMAND-NOTFOUND
 
 # Testing options
 # TimeOut is the amount of time in seconds to wait for processes

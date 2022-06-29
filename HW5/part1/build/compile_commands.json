@@ -1,7 +1,7 @@
 [
 {
-  "directory": "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/build",
-  "command": "C:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-g++.exe   -g -std=gnu++11 -o CMakeFiles\\part1.dir\\Part1Examples.cpp.obj -c \"C:\\Users\\USER\\OneDrive - Technion\\Desktop\\Studying\\Semester_D\\OOP\\OOP\\HW5\\part1\\Part1Examples.cpp\"",
-  "file": "C:/Users/USER/OneDrive - Technion/Desktop/Studying/Semester_D/OOP/OOP/HW5/part1/Part1Examples.cpp"
+  "directory": "/home/nir-nisim-co/OOP/HW5/part1/build",
+  "command": "/usr/bin/x86_64-redhat-linux-g++    -g   -std=gnu++11 -o CMakeFiles/part1.dir/Part1Examples.cpp.o -c /home/nir-nisim-co/OOP/HW5/part1/Part1Examples.cpp",
+  "file": "/home/nir-nisim-co/OOP/HW5/part1/Part1Examples.cpp"
 }
 ]
