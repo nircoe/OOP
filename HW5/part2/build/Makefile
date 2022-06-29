@@ -522,29 +522,29 @@ hw5part2/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\hw5part2.dir\build.make CMakeFiles/hw5part2.dir/build
 .PHONY : hw5part2/fast
 
-Part2Examples.obj: Part2Examples.cpp.obj
-.PHONY : Part2Examples.obj
+RushHourTests.obj: RushHourTests.cpp.obj
+.PHONY : RushHourTests.obj
 
 # target to build an object file
-Part2Examples.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\hw5part2.dir\build.make CMakeFiles/hw5part2.dir/Part2Examples.cpp.obj
-.PHONY : Part2Examples.cpp.obj
+RushHourTests.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hw5part2.dir\build.make CMakeFiles/hw5part2.dir/RushHourTests.cpp.obj
+.PHONY : RushHourTests.cpp.obj
 
-Part2Examples.i: Part2Examples.cpp.i
-.PHONY : Part2Examples.i
+RushHourTests.i: RushHourTests.cpp.i
+.PHONY : RushHourTests.i
 
 # target to preprocess a source file
-Part2Examples.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\hw5part2.dir\build.make CMakeFiles/hw5part2.dir/Part2Examples.cpp.i
-.PHONY : Part2Examples.cpp.i
+RushHourTests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hw5part2.dir\build.make CMakeFiles/hw5part2.dir/RushHourTests.cpp.i
+.PHONY : RushHourTests.cpp.i
 
-Part2Examples.s: Part2Examples.cpp.s
-.PHONY : Part2Examples.s
+RushHourTests.s: RushHourTests.cpp.s
+.PHONY : RushHourTests.s
 
 # target to generate assembly for a file
-Part2Examples.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\hw5part2.dir\build.make CMakeFiles/hw5part2.dir/Part2Examples.cpp.s
-.PHONY : Part2Examples.cpp.s
+RushHourTests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hw5part2.dir\build.make CMakeFiles/hw5part2.dir/RushHourTests.cpp.s
+.PHONY : RushHourTests.cpp.s
 
 # Help Target
 help:
@@ -586,9 +586,9 @@ help:
 	@echo ... NightlyTest
 	@echo ... NightlyUpdate
 	@echo ... hw5part2
-	@echo ... Part2Examples.obj
-	@echo ... Part2Examples.i
-	@echo ... Part2Examples.s
+	@echo ... RushHourTests.obj
+	@echo ... RushHourTests.i
+	@echo ... RushHourTests.s
 .PHONY : help
 
 
