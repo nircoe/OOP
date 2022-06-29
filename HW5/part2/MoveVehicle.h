@@ -1,4 +1,5 @@
-//#define MOVE_VEHICLE_H
+#ifndef MOVE_VEHICLE_H
+#define MOVE_VEHICLE_H
 
 #include "CellType.h"
 #include "Direction.h"
@@ -305,4 +306,4 @@ public:
 };
 
 
-//#endif
+#endif
